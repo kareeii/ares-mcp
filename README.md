@@ -2,7 +2,7 @@
 
 Hosted red-team toolkit for [Claude Code](https://claude.com/claude-code).
 
-This repository is the **marketplace install surface** only. The product runs at [aresmcp.com](https://aresmcp.com). Server source is not published here.
+This repository is the **marketplace install surface** only (plugin manifests + skills). The product runs at [aresmcp.com](https://aresmcp.com). Server source is not published here.
 
 ## Install
 
