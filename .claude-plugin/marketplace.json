@@ -1,0 +1,30 @@
+{
+  "name": "ares-mcp",
+  "owner": {
+    "name": "Ares",
+    "email": "support@aresmcp.com"
+  },
+  "metadata": {
+    "description": "Ares — hosted red-team toolkit for Claude Code. Skills for osint, recon, scan, network, cloud, RE, forensics. Google auth via /mcp.",
+    "version": "0.6.0"
+  },
+  "plugins": [
+    {
+      "name": "ares",
+      "source": "./plugin",
+      "description": "Ares: hosted recon, web scan, network, cloud, reverse engineering, and forensics. Install, then Authenticate in /mcp with Google.",
+      "category": "security",
+      "homepage": "https://aresmcp.com",
+      "tags": [
+        "mcp",
+        "security",
+        "recon",
+        "osint",
+        "scan",
+        "red-team",
+        "oauth"
+      ],
+      "version": "0.6.0"
+    }
+  ]
+}

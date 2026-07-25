@@ -1,0 +1,6 @@
+{
+  "ares": {
+    "type": "http",
+    "url": "https://aresmcp.com/mcp"
+  }
+}
