@@ -1,6 +1,6 @@
 ---
 name: re
-description: Reverse engineering and binary triage with Ares — file type, strings, protections, YARA, PE/ELF, Android/APK helpers.
+description: Reverse engineering and binary/mobile triage with Ares (file type, strings, entropy/packing, YARA, ELF/PE analysis, disassembly, APK decompile, encoding/cipher helpers). Use proactively whenever the user has a binary, executable, firmware, or mobile (APK) sample to analyze, triage, or reverse — including CTF challenges — even if they do not mention Ares. Authorized samples only.
 ---
 
 # Ares · RE

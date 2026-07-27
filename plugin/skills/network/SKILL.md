@@ -1,6 +1,6 @@
 ---
 name: network
-description: Network and service recon with Ares — port scans, banners, and unauthenticated service checks.
+description: Network and service recon with Ares (port scans, banner grab, TLS/SSH audit, and unauthenticated service checks for SMB/FTP/Redis/Mongo/SNMP/etc.). Use proactively whenever the user wants to scan ports, enumerate services, or check the network exposure of a host, IP, or range they are authorized to test — even if they do not mention Ares. Authorized targets only; no internet-wide scanning.
 ---
 
 # Ares · Network

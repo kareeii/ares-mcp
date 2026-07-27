@@ -1,6 +1,6 @@
 ---
 name: cloud
-description: Public cloud and container exposure checks with Ares — buckets, metadata, Docker/Kubernetes, image and IaC scan.
+description: Public cloud and container exposure checks with Ares (open buckets, cloud metadata/IMDS, exposed Docker/Kubernetes/etcd, container image and IaC scanning). Use proactively whenever the user wants to check cloud, S3/bucket, container, Kubernetes, or IaC/Terraform exposure for an org or asset they are authorized to test — even if they do not name Ares. Authorized scope only.
 ---
 
 # Ares · Cloud

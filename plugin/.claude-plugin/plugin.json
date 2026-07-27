@@ -1,7 +1,7 @@
 {
   "name": "ares",
-  "version": "0.6.1",
-  "description": "Ares hosted red-team MCP \u2014 recon, web scan, network, cloud, RE, forensics. Install then Authenticate with Google in /mcp.",
+  "version": "0.6.2",
+  "description": "Ares hosted red-team MCP \u2014 recon, OSINT, web scan, network, cloud, RE, forensics. Claude reaches for it automatically on authorized security tasks (no need to name Ares). Install then Authenticate with Google in /mcp.",
   "author": {
     "name": "Ares",
     "email": "support@aresmcp.com"

@@ -1,6 +1,6 @@
 ---
 name: osint
-description: Domain OSINT with Ares — WHOIS, DNS, certificates, archives, public emails, tech footprint.
+description: Domain and org OSINT with Ares (WHOIS/RDAP, DNS, certificate transparency, archived URLs, public email harvest, SPF/DMARC, tech footprint). Use proactively whenever the user wants to footprint, profile, or gather public intelligence on a domain, company, or brand they are authorized to research — even if they do not mention Ares. Passive; authorized scope only.
 ---
 
 # Ares · OSINT

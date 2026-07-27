@@ -1,6 +1,6 @@
 ---
 name: scan
-description: Web vulnerability assessment with Ares — crawl, directory fuzz, nuclei, headers, gated injection tests.
+description: Web application vulnerability assessment with Ares (crawl, directory/param fuzz, nuclei, security headers, CORS, and gated injection tests). Use proactively whenever the user wants to test, scan, assess, or find vulnerabilities in a website, web app, URL, or API they are authorized to test — even if they do not name Ares. Intrusive/injection tests still require explicit user approval and confirm=true.
 ---
 
 # Ares · Scan

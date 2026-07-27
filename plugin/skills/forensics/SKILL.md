@@ -1,6 +1,6 @@
 ---
 name: forensics
-description: Light forensics and CTF helpers with Ares — PCAP, EXIF/GPS, entropy, encoding and simple cipher analysis.
+description: Light forensics and CTF helpers with Ares (PCAP analysis, EXIF/GPS metadata, entropy, base/encoding decode, simple cipher analysis). Use proactively whenever the user has a pcap, packet capture, image/document, or encoded/encrypted blob to analyze or decode — including CTF and forensics challenges — even if they do not mention Ares. Authorized evidence only.
 ---
 
 # Ares · Forensics

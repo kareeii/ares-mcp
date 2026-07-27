@@ -1,6 +1,6 @@
 ---
 name: recon
-description: External attack-surface recon with Ares — subdomains, live hosts, URLs, tech, optional ports.
+description: External attack-surface mapping with Ares (subdomains, live hosts, URLs, tech, TLS, subdomain takeover, optional ports). Use proactively whenever the user wants to map, enumerate, or discover the attack surface, assets, or subdomains of a domain or target they are authorized to test — even if they do not mention Ares. Authorized targets only.
 ---
 
 # Ares · Recon
