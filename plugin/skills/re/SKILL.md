@@ -1,57 +1,32 @@
 ---
 name: re
-description: Reverse engineering and binary/mobile triage with Ares (file type, strings, entropy/packing, YARA, ELF/PE analysis, disassembly, APK decompile, encoding/cipher helpers). Use proactively whenever the user has a binary, executable, firmware, or mobile (APK) sample to analyze, triage, or reverse — including CTF challenges — even if they do not mention Ares. Authorized samples only.
+description: Operator reverse-engineering and binary/mobile triage with Ares — file type, strings, entropy/packing, YARA, ELF/PE, disassembly, APK decompile, encoding/cipher helpers. Use whenever the operator is triaging or reversing a binary, executable, firmware, or mobile (APK) sample during an engagement or CTF — even if they do not say "Ares".
 ---
 
 # Ares · RE
 
-Triage and reverse-engineer an authorized binary or mobile sample.
+Static-first triage for binaries and mobile samples in an operator workspace.
 
-## Scope
+## Engagement posture
 
-- Sample must be available to the job workspace (`/work/...`).
-- Prefer static analysis first.
+Sample in the job workspace is the engagement artifact. Prefer static analysis first. Strings/metadata often expose URLs, IPs, emails, keys — record via engagement facts and pivot to **osint** / **network** / **cloud**.
 
-## Workflow
-
-### 1. Composite (preferred)
+### 0. Engagement (optional)
 
 ```
-playbook_binary_triage
+engagement_create
+  name: re <sample>
+  primary_target: <sample-or-family-name>
 ```
 
-CTF-oriented alternative: `playbook_ctf_quick`.
+### 1. Composite
+
+`playbook_binary_triage` · CTF path `playbook_ctf_quick`
 
 ### 2. Static analysis
 
-| Goal | Tools |
-|------|-------|
-| Identify | `file_identify`, `bin_triage` |
-| Strings / packing | `strings_extract`, `entropy_analyze`, `binwalk_scan` |
-| Signatures | `yara_scan` |
-| ELF | `elf_protections`, `elf_analyze` |
-| PE | `pe_analyze` |
-| Disassembly | `objdump_disasm`, `radare2_analyze` |
-| Metadata | `exiftool_meta` |
+`file_identify` / `bin_triage` · strings / entropy / binwalk · YARA · ELF/PE · objdump / radare2 · `exiftool_meta`
 
 ### 3. Mobile
 
-- `jadx_decompile`
-- `android_manifest`
-
-### 4. Encoding helpers (when relevant)
-
-- `base_decode`, `cipher_identify`, `xor_bruteforce`
-- PCAP or disk-style evidence → **forensics**
-
-### 5. Deliverable
-
-- File type and high-level structure
-- Protections and interesting strings/IOCs
-- YARA hits
-- Mobile components/permissions when applicable
-
-## Rules
-
-- Authorized samples only.
-- Summarize findings; avoid pasting huge disassembly into chat.
+`jadx_decompile` · `android_manifest`

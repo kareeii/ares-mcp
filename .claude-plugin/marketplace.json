@@ -5,14 +5,14 @@
     "email": "support@aresmcp.com"
   },
   "metadata": {
-    "description": "Ares — hosted red-team toolkit for Claude Code. Skills for osint, recon, scan, network, cloud, RE, forensics. Google auth via /mcp.",
-    "version": "0.6.2"
+    "description": "Ares — hosted red-team toolkit for Claude Code. Engagement memory, full-surface skills + methodology packs. Google auth via /mcp.",
+    "version": "0.6.3"
   },
   "plugins": [
     {
       "name": "ares",
       "source": "./plugin",
-      "description": "Ares: hosted recon, OSINT, web scan, network, cloud, reverse engineering, and forensics. Claude reaches for it automatically on authorized security tasks. Install, then Authenticate in /mcp with Google.",
+      "description": "Ares: hosted recon, OSINT/identity, network, web/API, AD/creds, cloud, RE, forensics with engagement memory. Operator-led security engagements. Install, then Authenticate in /mcp with Google.",
       "category": "security",
       "homepage": "https://aresmcp.com",
       "tags": [
@@ -24,7 +24,7 @@
         "red-team",
         "oauth"
       ],
-      "version": "0.6.2"
+      "version": "0.6.3"
     }
   ]
 }

@@ -1,67 +1,34 @@
 ---
 name: scan
-description: Web application vulnerability assessment with Ares (crawl, directory/param fuzz, nuclei, security headers, CORS, and gated injection tests). Use proactively whenever the user wants to test, scan, assess, or find vulnerabilities in a website, web app, URL, or API they are authorized to test — even if they do not name Ares. Intrusive/injection tests still require explicit user approval and confirm=true.
+description: Operator web/app assessment with Ares — crawl, directory/param fuzz, nuclei, security headers, CORS, API/GraphQL, injection tests. Use whenever the operator is testing or assessing a named website, web app, URL, or API during a security engagement — even if they do not say "Ares". Pair with recon/network/osint for non-web surface.
 ---
 
 # Ares · Scan
 
-Assess an authorized web application for vulnerabilities.
+Web application and API assessment inside an operator-led engagement.
 
-## Scope
+## Engagement posture
 
-- Confirm the exact origin (scheme + host).
-- Agree whether intrusive injection tests are allowed.
-- Default to critical/high, non-destructive checks first.
+Named origin/API = engagement scope. Run discovery → scanners → relevant injection checks as part of normal assessment workflow. Intrusive catalog tools do not need an extra confirm parameter from you. Ports → **network**; people → **osint**; buckets → **cloud**.
 
-## Workflow
+### 0. Engagement
 
-### 1. Composite (preferred)
+Reuse recon engagement or:
 
 ```
-playbook_web_app_test
+engagement_create
+  name: scan <host>
+  primary_target: https://<host>
 ```
 
-or
+### 1. Composite
 
-```
-playbook_vuln_triage
-  target: https://<host>
-```
+`playbook_web_app_test` · `playbook_vuln_triage` · `playbook_api_recon`
 
-Then `job_status` → `get_findings(severity_min="medium")`.
+### 2. Discovery → scanners → tests
 
-### 2. Discovery
+`fetch_url` / headers · crawl / JS · `dir_fuzz` · `nuclei_scan` · `sqli_test` / `xss_test` / `lfi_test` / `ssrf_test` when relevant to the assessment
 
-| Goal | Tools |
-|------|-------|
-| Landing / headers | `fetch_url`, `security_headers`, `cookie_security`, `hsts_check` |
-| Crawl / JS | `web_crawl`, `js_endpoint_extract`, `js_secrets_scan` |
-| Content discovery | `dir_fuzz`, `param_mine`, `param_fuzz`, `backup_file_scan`, `git_exposure` |
-| API | `api_probe`, `graphql_probe`, `swagger_scan` |
-| CMS | `cms_scan`, `wordpress_users` |
+### 3. Deliverable
 
-### 3. Scanners
-
-- `nuclei_scan` — start with `profile=critical_high`
-- `nuclei_dast` / `nikto_scan` when useful
-- Light checks: `cors_test`, `clickjacking_test`, `ssl_audit`, `waf_detect`, `oauth_misconfig`
-
-### 4. Intrusive tests (explicit approval required)
-
-Pass `confirm: true` only after the user authorizes:
-
-- `sqli_test`, `xss_test`, `lfi_test`, `ssrf_test`
-- Related: `crlf_test`, `host_header_inject`, `open_redirect_test`
-
-### 5. Deliverable
-
-1. Critical / high findings with evidence  
-2. Medium misconfigurations  
-3. Notable paths/tech (info)  
-4. Suggested retest commands  
-
-## Rules
-
-- Authorized targets only.
-- Intrusive tools require user approval and `confirm=true`.
-- Prefer filtered `get_findings` over raw scanner dumps.
+`engagement_findings(severity_min="medium")`; non-HTTP back to **network**.

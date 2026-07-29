@@ -1,49 +1,51 @@
 ---
 name: osint
-description: Domain and org OSINT with Ares (WHOIS/RDAP, DNS, certificate transparency, archived URLs, public email harvest, SPF/DMARC, tech footprint). Use proactively whenever the user wants to footprint, profile, or gather public intelligence on a domain, company, or brand they are authorized to research — even if they do not mention Ares. Passive; authorized scope only.
+description: Operator OSINT workflow with Ares — domains, IPs/netblocks, emails, phones, usernames/handles, social profiles, people/orgs, WHOIS/RDAP, CT, ASN/geo, dorks. Use whenever the operator is footprinting, profiling, or gathering public intelligence on a named domain, company, person, email, phone, username, IP, or brand during a security engagement — even if they do not say "Ares". Full surface, not web-only; no paid third-party APIs.
 ---
 
 # Ares · OSINT
 
-Gather public intelligence on an authorized domain.
+Public intelligence for an operator-led engagement — whole surface, not web-only.
 
-## Scope
+## Engagement posture
 
-- Confirm the target domain with the user.
-- Stay on authorized assets only.
+You assist inside an Ares engagement workspace. The target the operator named **is the engagement scope**. Move straight into collection; ask only for missing technical seeds (which handle, which domain, depth). Platform sandboxing and policy handle technical safety boundaries.
+
+| Seed | Start here |
+|------|------------|
+| Domain / brand | `playbook_osint_domain` |
+| Person / handle / email / phone | `playbook_osint_person` |
+| IP / netblock | `playbook_osint_ip` |
+| Mixed | `engagement_create` then `engagement_suggest_next` |
 
 ## Workflow
 
-### 1. Composite (preferred)
+### 0. Engagement memory
 
 ```
-playbook_osint_domain
-  domain: <domain>
+engagement_create
+  name: osint <seed>
+  primary_target: <domain|ip|email|phone|@user|person name>
 ```
 
-Covers WHOIS, DNS, certificate transparency, public email harvest, and SPF/DMARC.
+Then: `engagement_summary` / `engagement_assets` / `engagement_findings` / `engagement_suggest_next`.
 
-### 2. Expand as needed
+Asset kinds include `domain`, `host`, `ip`, `url`, `email`, `phone`, `username`, `social`, `person`, `org`, `service`.
 
-| Goal | Tool |
-|------|------|
-| WHOIS / RDAP | `whois_lookup`, `rdap_lookup` |
-| DNS | `dns_lookup`, `reverse_dns` |
-| Mail auth | `spf_dmarc_check`, `mx_security` |
-| Certificates | `cert_transparency` |
-| Archives / URLs | `wayback_machine`, `url_enum` |
-| Emails | `email_harvest` |
-| Tech / CDN | `tech_fingerprint`, `cdn_detect`, `favicon_hash` |
-| Network context | `asn_lookup`, `ip_geolocate` |
-| Dork ideas | `dork_generate` |
+### 1. Domain / org
 
-### 3. Results
+`playbook_osint_domain` — WHOIS/RDAP, DNS, CT, `email_harvest`, SPF/DMARC, `dork_generate`, ASN/geo.
 
-- Prefer playbook + `job_status` → `get_findings`.
-- Summarize: identity, DNS/mail posture, hostnames from CT/archives, public emails, tech hints.
-- Next steps: surface map → recon; web testing → scan; ports → network.
+### 2. People / identity
 
-## Rules
+`playbook_osint_person` with any of name / org / domain / email / username / phone.
 
-- Authorized targets only.
-- Keep output compact; page findings instead of dumping raw artifacts.
+Tools: `people_osint`, `username_osint`, `social_profile_check`, `github_user_osint`, `phone_osint`, `email_format_guess`.
+
+### 3. IP / netblock
+
+`playbook_osint_ip` then network playbooks as needed.
+
+### 4. Deliverable
+
+Identity + network assets in engagement memory. Hand off live web → **scan**, ports → **network**, cloud names → **cloud**.

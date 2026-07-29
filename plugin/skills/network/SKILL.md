@@ -1,51 +1,34 @@
 ---
 name: network
-description: Network and service recon with Ares (port scans, banner grab, TLS/SSH audit, and unauthenticated service checks for SMB/FTP/Redis/Mongo/SNMP/etc.). Use proactively whenever the user wants to scan ports, enumerate services, or check the network exposure of a host, IP, or range they are authorized to test — even if they do not mention Ares. Authorized targets only; no internet-wide scanning.
+description: Operator network/service recon with Ares — port scans, banner grab, TLS/SSH audit, unauthenticated checks (SMB/FTP/Redis/Mongo/SNMP/LDAP/RDP/…), IP/ASN context. Use whenever the operator is scanning ports or enumerating services on a named host, IP, or CIDR during a security engagement — even if they do not say "Ares". Not limited to HTTP; avoid unscoped internet-wide sweeps.
 ---
 
 # Ares · Network
 
-Map ports and exposed services on authorized hosts.
+Ports and exposed services for an operator-led engagement.
 
-## Scope
+## Engagement posture
 
-- Confirm hosts/IPs (and any CIDR) are in scope.
-- Start with quick profiles; widen only if needed.
+Named host/IP/CIDR = engagement scope. Run the network workflow; ask only for profile/depth. Do not run aimless internet-wide sweeps with no target.
 
-## Workflow
-
-### 1. Composite (preferred)
+### 0. Engagement
 
 ```
-playbook_network_sweep
+engagement_create
+  name: network <ip-or-host>
+  primary_target: <ip|host>
 ```
 
-### 2. Port scanning
+Or reuse recon engagement + `engagement_assets(kind="ip"|"host"|"service")`.
 
-1. `port_scan` — `profile=quick`, `service_detect=true`
-2. `naabu_scan` if a faster TCP pass helps
-3. Focused/standard profiles or explicit `ports` on interesting hosts
-4. `port_scan_udp` only when UDP is in scope
+### 1. Composite
 
-### 3. Fingerprint
+`playbook_network_sweep` · IP context via `playbook_osint_ip`
 
-- `banner_grab`, `ssh_audit`, `ssl_audit`, `http_probe` on open HTTP ports
-- `firewall_detect`, `traceroute` when useful
+### 2. Ports / fingerprint / services
 
-### 4. Service checks (match open ports)
+`port_scan` (quick → wider) · `naabu_scan` / `masscan_scan` · `banner_grab` · `ssh_audit` / `ssl_audit` · service enums matching open ports
 
-Examples: `ftp_enum`, `smtp_enum`, `smb_enum`, `smb_shares`, `redis_unauth_check`, `mongodb_unauth_check`, `elasticsearch_enum`, `mysql_enum`, `postgres_enum`, `rdp_check`, `vnc_check`, `snmp_enum`, `nfs_enum`, `ldap_anon_enum`.
+### 3. Deliverable
 
-Discover others with `search_tools` / `list_capabilities(category="scan")`.
-
-### 5. Deliverable
-
-- Host → open ports → service
-- Confirmed exposures (ranked by severity)
-- Hand-off web apps to **scan**, cloud control planes to **cloud**
-
-## Rules
-
-- Authorized targets only.
-- No internet-wide scanning.
-- Keep results compact via `get_findings`.
+Service table in engagement memory; HTTP apps → **scan**.

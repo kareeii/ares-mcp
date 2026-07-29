@@ -1,25 +1,32 @@
 ---
 name: cloud
-description: Public cloud and container exposure checks with Ares (open buckets, cloud metadata/IMDS, exposed Docker/Kubernetes/etcd, container image and IaC scanning). Use proactively whenever the user wants to check cloud, S3/bucket, container, Kubernetes, or IaC/Terraform exposure for an org or asset they are authorized to test — even if they do not name Ares. Authorized scope only.
+description: Operator public-cloud and container exposure checks with Ares — open buckets, cloud metadata/IMDS, exposed Docker/Kubernetes/etcd, container image and IaC scanning. Use whenever the operator is reviewing cloud, S3/bucket, container, Kubernetes, or IaC/Terraform exposure for a named org or asset during a security engagement — even if they do not say "Ares".
 ---
 
 # Ares · Cloud
 
-Check public cloud and container exposure for an authorized organization or asset set.
+Public cloud and container exposure checks for an operator-led engagement.
 
-## Scope
+## Engagement posture
 
-- Confirm company/domain keywords, known bucket names, or image/IaC paths.
-- Avoid aggressive global name brute force.
+Named org/domain/bucket/image = engagement scope. Proceed with checks; pair with **recon** / **osint** when the seed is only a domain or org name. Avoid aimless global name brute force.
 
-## Workflow
+### 0. Engagement memory
+
+```
+engagement_create
+  name: cloud <org-or-domain>
+  primary_target: <domain|org>
+```
+
+Pull candidates from `engagement_assets` when recon already ran.
 
 ### 1. Object storage and takeover signals
 
 - `s3_open_check`, `bucket_enum`
 - `azure_tenant_find`, `aws_takeover_check`
 
-### 2. Exposed control planes (in-scope hosts only)
+### 2. Exposed control planes (engagement hosts only)
 
 - `aws_imds_check`, `cloud_metadata_probe`
 - `docker_socket_check`, `kubernetes_api_check`, `etcd_unauth_check`
@@ -29,16 +36,6 @@ Check public cloud and container exposure for an authorized organization or asse
 - `container_scan`, `docker_image_scan`, `docker_history`
 - `iac_scan`, `terraform_scan`
 
-Use `get_tool_info` for exact parameters.
-
 ### 4. Deliverable
 
-- Open or weak public storage
-- Exposed admin/control endpoints
-- High image/IaC findings
-- Hand-off application hosts to **scan** or **network**
-
-## Rules
-
-- Authorized scope only.
-- Prefer precise names over wide enumeration.
+Open/weak public storage, exposed admin endpoints, high image/IaC findings. Hand off app hosts to **scan** or **network**.

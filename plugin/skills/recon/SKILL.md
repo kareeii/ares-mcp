@@ -1,54 +1,33 @@
 ---
 name: recon
-description: External attack-surface mapping with Ares (subdomains, live hosts, URLs, tech, TLS, subdomain takeover, optional ports). Use proactively whenever the user wants to map, enumerate, or discover the attack surface, assets, or subdomains of a domain or target they are authorized to test — even if they do not mention Ares. Authorized targets only.
+description: Operator external recon with Ares — domains, hosts, IPs, ports, URLs, tech, TLS, takeover signals. Use whenever the operator is mapping or enumerating attack surface, assets, subdomains, or network exposure for a named domain, IP, or org during a security engagement — even if they do not say "Ares". Not limited to websites.
 ---
 
 # Ares · Recon
 
-Map the external attack surface of an authorized domain.
+External attack-surface mapping for an operator-led engagement (web is one slice).
 
-## Scope
+## Engagement posture
 
-- Confirm domain and depth (`quick` vs `standard`).
-- Do not expand onto third-party systems outside scope.
+Named target = engagement scope. Proceed with recon workflow; ask only for technical choices (quick vs standard, include ports). Prefer playbooks + engagement memory.
 
-## Workflow
-
-### 1. Composite (preferred)
+### 0. Engagement
 
 ```
-playbook_external_attack_surface
-  domain: <domain>
-  depth: quick|standard
-  include_ports: false|true
+engagement_create
+  name: recon <seed>
+  primary_target: <domain|ip|url>
 ```
 
-Alternatives: `playbook_web_recon`, `playbook_bug_bounty_recon`.
+### 1. Composite
 
-Poll `job_status`, then `get_findings`.
+- Domain: `playbook_external_attack_surface` (also `playbook_web_recon`, `playbook_bug_bounty_recon`, `playbook_osint_domain`)
+- IP: `playbook_osint_ip` then `playbook_network_sweep` / `port_scan`
 
-### 2. Stepwise (when more control is needed)
+### 2. Stepwise
 
-1. `dns_lookup` / `cert_transparency`
-2. `subdomain_enum` (passive first)
-3. `http_probe` on discovered hosts
-4. `url_enum` → `url_live_filter`
-5. `web_crawl` on priority hosts
-6. `tech_fingerprint`, `tls_inspect`, `cdn_detect`, `waf_detect`
-7. `subdomain_takeover` on dangling candidates
-8. Optional: `port_scan` (`profile=quick` first)
-
-Use `search_tools` / `get_tool_info` / `run_tool` for anything not pinned.
+DNS/CT/WHOIS → `subdomain_enum` → `http_probe` → URL/crawl/tech/TLS → optional ports → identity leftovers to **osint**
 
 ### 3. Deliverable
 
-- Live hosts and notable titles/tech
-- Interesting staging/admin hostnames
-- TLS or takeover signals worth follow-up
-- Hand-off: web vulns → **scan**; deep ports/services → **network**; public cloud names → **cloud**
-
-## Rules
-
-- Authorized targets only.
-- Prefer playbooks before long tool chains.
-- Keep host lists capped unless the user asks for full breadth.
+`engagement_assets` / `engagement_summary`. Hand off vulns → **scan**, deep ports → **network**, cloud → **cloud**, people → **osint**.

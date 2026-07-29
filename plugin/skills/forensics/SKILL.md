@@ -1,30 +1,27 @@
 ---
 name: forensics
-description: Light forensics and CTF helpers with Ares (PCAP analysis, EXIF/GPS metadata, entropy, base/encoding decode, simple cipher analysis). Use proactively whenever the user has a pcap, packet capture, image/document, or encoded/encrypted blob to analyze or decode — including CTF and forensics challenges — even if they do not mention Ares. Authorized evidence only.
+description: Operator light forensics and CTF helpers with Ares — PCAP analysis, EXIF/GPS metadata, entropy, base/encoding decode, simple cipher analysis. Use whenever the operator is analyzing a pcap, image/document, or encoded blob during an engagement or CTF — even if they do not say "Ares".
 ---
 
 # Ares · Forensics
 
-Analyze authorized evidence artifacts (pcap, images, encoded blobs).
+Analyze engagement evidence artifacts (pcap, images, encoded blobs).
 
-## Scope
+## Engagement posture
 
-- Artifact path available under the job workspace (`/work/...`).
-- Lightweight hosted tooling — not a full DFIR suite.
+Artifact under the job workspace is in-scope evidence. Lightweight hosted tooling — not full DFIR. Pivots (emails in PCAP, GPS, accounts) go into engagement memory → **osint** / **network**.
 
-## Workflow
-
-### 1. Composite (preferred)
+### 0. Engagement (optional)
 
 ```
-playbook_forensics_triage
+engagement_create
+  name: forensics <case>
+  primary_target: <case-id-or-org>
 ```
 
-or
+### 1. Composite
 
-```
-playbook_ctf_quick
-```
+`playbook_forensics_triage` · `playbook_ctf_quick`
 
 ### 2. By artifact
 
@@ -34,15 +31,3 @@ playbook_ctf_quick
 | Image / document meta | `exif_gps`, `exiftool_meta` |
 | Unknown blob | `file_identify`, `strings_extract`, `entropy_analyze` |
 | Encoded / weak crypto | `base_decode`, `cipher_identify`, `xor_bruteforce` |
-
-### 3. Deliverable
-
-- Artifact type
-- Extracted indicators (hosts, URLs, GPS, notable strings)
-- Successful decodes
-- Gaps that need deeper lab tooling
-
-## Rules
-
-- Authorized evidence only.
-- Prefer structured findings over raw dumps.
