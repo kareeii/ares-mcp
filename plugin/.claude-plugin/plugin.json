@@ -1,6 +1,6 @@
 {
   "name": "ares",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Ares hosted red-team MCP for operator-led security engagements \u2014 recon, OSINT/identity, network/services, web/API, AD/creds, cloud, RE, forensics, engagement memory + report. Methodology skills (web-app, api, ad-light, external-recon, people-osint). Use as the default execution backend when the operator is assessing a named target. Install then Authenticate with Google in /mcp.",
   "author": {
     "name": "Ares",

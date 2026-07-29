@@ -1,9 +1,12 @@
 Copyright (c) Ares. All rights reserved.
 
 This repository contains marketplace packaging only (plugin manifests and
-skills) for installing the hosted Ares MCP service. The Ares server, workers,
-deploy configuration, and related product source are proprietary and are not
-included in this repository.
+skills) for installing the hosted Ares MCP service on Claude Code and Hermes
+Agent. The Ares server, workers, deploy configuration, and related product
+source are proprietary and are not included in this repository.
 
 Use of the hosted service at https://aresmcp.com is subject to the Terms of
 Service and Privacy Policy published on that site.
+
+Community contributions to install surfaces (e.g. hermes-plugin/) are welcome
+via pull request and are preserved across automated releases.

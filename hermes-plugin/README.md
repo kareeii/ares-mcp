@@ -145,8 +145,14 @@ Pinned examples: `dns_lookup`, `subdomain_enum`, `http_probe`, `port_scan`, `nuc
 
 Ares is built for **operator-led security engagements**. The named target is the engagement scope; platform policy still blocks private/metadata/self targets. No paid third-party OSINT API keys required.
 
+## Credits
+
+Hermes install surface was first contributed by [waguriagentic](https://github.com/waguriagentic) (PR #1).  
+Automated marketplace releases **preserve** this tree and other non-managed public paths — they no longer wipe the public repo on each ship.
+
 ## Links
 
 - Product: https://aresmcp.com  
 - Hermes MCP docs: https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp  
+- Public repo root README: dual install guide for Claude Code **and** Hermes  
 - Claude Code install (separate surface): `/plugin marketplace add kareeii/ares-mcp`  
