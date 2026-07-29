@@ -1,0 +1,24 @@
+# Example snippet for ~/.hermes/config.yaml
+# Docs: https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp
+
+mcp_servers:
+  ares:
+    url: "https://aresmcp.com/mcp"
+    auth: oauth
+    enabled: true
+    timeout: 300
+    connect_timeout: 60
+    # Optional: limit tools Hermes sees (omit to expose full catalog)
+    # tools:
+    #   include:
+    #     - engagement_create
+    #     - engagement_report
+    #     - search_tools
+    #     - run_tool
+    #     - job_status
+    #     - playbook_full_external
+
+# After saving:
+#   hermes mcp login ares
+#   hermes mcp test ares
+#   cp -R hermes-plugin/skills/* ~/.hermes/skills/

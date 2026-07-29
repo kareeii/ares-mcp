@@ -90,6 +90,16 @@ Authenticate via `/mcp` afterward. Skills come with the plugin install.
 
 Ares is built for **operator-led security engagements**. The named target defines session scope; the agent is the execution partner. Platform policy still blocks private/metadata/self targets.
 
+## Hermes Agent
+
+Hermes does not use Claude Code’s `/mcp` UI. Use the **Hermes surface** in this repo:
+
+- [`hermes-plugin/`](./hermes-plugin/) — manifest, skills, and install notes  
+- Config: `url: https://aresmcp.com/mcp` + `auth: oauth` in `~/.hermes/config.yaml`  
+- Auth: `hermes mcp login ares` (browser OAuth; tokens under `~/.hermes/mcp-tokens/`)
+
+See [`hermes-plugin/README.md`](./hermes-plugin/README.md).
+
 ## Links
 
 - Product: https://aresmcp.com

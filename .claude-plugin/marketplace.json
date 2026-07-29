@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Ares — hosted red-team toolkit for Claude Code. Engagement memory, full-surface skills + methodology packs. Google auth via /mcp.",
-    "version": "0.6.3"
+    "version": "0.6.4"
   },
   "plugins": [
     {
@@ -24,7 +24,7 @@
         "red-team",
         "oauth"
       ],
-      "version": "0.6.3"
+      "version": "0.6.4"
     }
   ]
 }
